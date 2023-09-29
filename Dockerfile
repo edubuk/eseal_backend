@@ -1,10 +1,10 @@
-FROM alpine:3.18.4
+FROM ubuntu:latest
 
 ENV BUN_INSTALL=$HOME/.bun
 
 ENV PATH=$BUN_INSTALL/bin:$PATH
 
-RUN apk add --no-cache curl bash
+RUN apt install curl bash
 
 RUN curl -fsSL https://bun.sh/install | bash
 
