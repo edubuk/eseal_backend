@@ -7,16 +7,8 @@ export default class EsealService {
     this.db = db;
   }
 
-  getEseals() {
-    return this.db.getEseals();
-  }
-
   getEseal(filehash: string) {
     return this.db.getEseal(filehash);
-  }
-
-  getTxHash(filehash: string) {
-    return this.db.getTxHash(filehash);
   }
 
   createEseal(
@@ -29,10 +21,6 @@ export default class EsealService {
     signer: string
   ) {
     this.db.createEseal(filehash, issued_to, issued_by, cert_type, tx_hash, timestamp, signer);
-  }
-
-  createTxHash(filehash: string, tx_hash: string) {
-    this.db.createTxHash(filehash, tx_hash);
   }
 }
 

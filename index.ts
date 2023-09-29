@@ -5,7 +5,7 @@ const db = new EsealDB();
 const service = new EsealService(db);
 
 const server = Bun.serve({
-  port: 3000,
+  port: 4000,
   hostname: "0.0.0.0",
   async fetch(request: Request): Promise<Response> {
     // response.
@@ -14,14 +14,6 @@ const server = Bun.serve({
     const {pathname, searchParams} = new URL(url);
 
     console.log(`Method : ${method}\nURL : ${url}\nPathname : ${pathname}\nSearch Params : ${searchParams}`);
-
-    if (method === 'GET' && pathname === '/eseals') {
-      const result = service.getEseals();
-      console.log(`RESPONSE=${result}\nSTATUS=200`);
-      const response = new Response(JSON.stringify(result), {status: 200});
-      response.headers.set("Access-Control-Allow-Origin", "*");
-      return response;
-    } 
 
     if (method === 'GET' && pathname ==='/eseal') {
       const hash: string = searchParams.get("filehash");
@@ -32,15 +24,6 @@ const server = Bun.serve({
       return response;
     }
     
-    if (method === 'GET' && pathname ==='/tx_hash') {
-      const hash: string = searchParams.get("filehash");
-      const result: string = service.getTxHash(hash);
-      console.log(`RESPONSE=${result}\nSTATUS=200`);
-      const response = new Response(result, {status: 200});
-      response.headers.set("Access-Control-Allow-Origin", "*");
-      return response;
-    }
-
     if (method === 'POST' && pathname === '/eseal') {
       const data = await request.json();
       console.log(data);
@@ -65,22 +48,7 @@ const server = Bun.serve({
       return response;
     }
 
-    if (method === 'POST' && pathname === '/tx_hash') {
-      const req: [] = await request.json();
-      console.log(req);
-      console.log(req[0]);
-      console.log(req[1]);
-      const filehash: string = req[0];
-      const tx_hash: string = req[1];
-      console.log(`Filehash : ${filehash}\nTx_hash : ${tx_hash}`);
-      service.createTxHash(filehash, tx_hash);
-      console.log(`RESPONSE=SUCCESS\nSTATUS=201`);
-      const response = new Response("Successfully Written The Record to Database", {status: 201});
-      response.headers.set('Access-Control-Allow-Origin', '*');
-      return response;
-    }
-
-    return new Response("You reached the Bun Server! You should try reaching the data using /eseals /eseal endpoints", {status: 200});
+    return new Response("You reached the Edubuk Bun Server! You should try reaching the data using /eseals /eseal endpoints", {status: 200});
   }
 });
 
