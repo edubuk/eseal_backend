@@ -6,7 +6,7 @@ ENV PATH=$BUN_INSTALL/bin:$PATH
 
 RUN apt update -y
 
-RUN apt install -y curl bash
+RUN apt install -y curl bash unzip
 
 RUN curl -fsSL https://bun.sh/install | bash
 
