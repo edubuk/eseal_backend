@@ -20,4 +20,4 @@ COPY . .
 
 EXPOSE 4000
 
-CMD ["bun", "run index.ts"]
+CMD ["bun", "run", "index.ts"]
