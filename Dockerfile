@@ -18,6 +18,8 @@ RUN bun install
 
 COPY . .
 
+VOLUME /app/database
+
 EXPOSE 4000
 
 CMD ["bun", "run", "index.ts"]

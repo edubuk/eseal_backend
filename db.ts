@@ -14,7 +14,7 @@ export default class EsealDB {
   db: Database;
 
   constructor() {
-    this.db = new Database("eseal.db");
+    this.db = new Database("./database/eseal.db");
 
     this.db.run(
       "CREATE TABLE IF NOT EXISTS eseal (filehash TEXT PRIMARY KEY NOT NULL, issued_to TEXT, issued_by, cert_type TEXT, tx_hash TEXT, timestamp TEXT, signer TEXT)"
